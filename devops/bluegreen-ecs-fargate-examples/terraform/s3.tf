@@ -1,11 +1,7 @@
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = lower(join("-", [replace(local.name, "_", "-"), "pipeline-support-bucket-7rehfwuy5e656"]))
+  force_destroy = true
 }
-
-# resource "aws_s3_bucket_acl" "codepipeline_bucket" {
-#   bucket = aws_s3_bucket.codepipeline_bucket.id
-#   acl    = "private"
-# }
 
 resource "aws_s3_bucket_versioning" "codepipeline_bucket" {
   bucket = aws_s3_bucket.codepipeline_bucket.id
@@ -16,12 +12,8 @@ resource "aws_s3_bucket_versioning" "codepipeline_bucket" {
 
 resource "aws_s3_bucket" "logs_bucket" {
   bucket = lower(join("-", [replace(local.name, "_", "-"), "logs-8t854wqq"]))
+  force_destroy = true
 }
-
-# resource "aws_s3_bucket_acl" "logs_bucket" {
-#   bucket = aws_s3_bucket.logs_bucket.id
-#   acl    = "private"
-# }
 
 resource "aws_s3_bucket_versioning" "logs_bucket" {
   bucket = aws_s3_bucket.logs_bucket.id
@@ -49,12 +41,8 @@ resource "aws_s3_bucket_policy" "logs_bucket_policy" {
 
 resource "aws_s3_bucket" "lambda_bucket" {
   bucket = lower(join("-", [replace(local.name, "_", "-"), "lambda-bucket-754734fhs"]))
+  force_destroy = true
 }
-
-# resource "aws_s3_bucket_acl" "lambda_bucket" {
-#   bucket = aws_s3_bucket.lambda_bucket.id
-#   acl    = "private"
-# }
 
 resource "aws_s3_bucket_versioning" "lambda_bucket" {
   bucket = aws_s3_bucket.lambda_bucket.id
@@ -87,12 +75,8 @@ data "aws_iam_policy_document" "lambda_bucket_policy" {
 
 resource "aws_s3_bucket" "testdata_bucket" {
   bucket = lower(join("-", [replace(local.name, "_", "-"), "testdata-bucket-8985488932ue"]))
+  force_destroy = true
 }
-
-# resource "aws_s3_bucket_acl" "testdata_bucket" {
-#   bucket = aws_s3_bucket.testdata_bucket.id
-#   acl    = "private"
-# }
 
 resource "aws_s3_bucket_versioning" "testdata_bucket" {
   bucket = aws_s3_bucket.testdata_bucket.id
