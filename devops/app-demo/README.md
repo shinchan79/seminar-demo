@@ -1,16 +1,19 @@
-
+``
 cd backend
 copilot app init todo
-copilot env init 
+copilot env init
+``
 
 copilot/environments/development/manifest.yml
-
+```
 copilot env ls
 copilot env deploy
+```
 
 # Set up backend
+```
 copilot svc init
-
+```
  To add a healthcheck, modify copilot/backend/manifest.yml, and add the healthcheck section shown below in the image section directly below port:
  
  ```
@@ -35,6 +38,7 @@ def receive_health_check():
 ```
 
 create DynamoDB: 
+```
 copilot storage init
 
 copilot svc deploy
@@ -42,7 +46,7 @@ copilot svc status
 
 mkdir todobackend
 mv automate-container-microservices-aws-copilot/code/backend/* todobackend/
-
+```
 The todobackend folder should now contain the following:
 ```
 .
@@ -67,6 +71,7 @@ The todobackend folder should now contain the following:
 └── requirements.txt
 ```
 
+```
 cd todobackend
 aws codecommit create-repository --repository-name todobackend --repository-description "My todoapp repository"
 git init
@@ -74,7 +79,7 @@ git switch -c main
 git remote add origin https://git-codecommit.$(aws configure get region).amazonaws.com/v1/repos/todobackend
 
 copilot pipeline init
-
+```
 
 You will also see an error message between the command you entered and where it is asking for input with the following:
 
@@ -91,20 +96,21 @@ Your pipeline will follow branch 'main'.
  Workloads
  dev
  No additional environments
- 
- copilot pipeline deploy
- 
+ ```
+copilot pipeline deploy
+
 git add -A
 git commit -m 'initial commit'
 git push origin main
-
+```
 # Frontend 
 cd frontend
-
+```
 copilot app init
+```
 Y
 todo
-
+```
 copilot svc init
 Load Balanced Web Service
 frontend
@@ -115,6 +121,7 @@ copilot svc status
 
 mkdir todofrontend
 mv automate-container-microservices-aws-copilot/code/frontend/* todofrontend/
+```
 
 ```
 .
@@ -157,6 +164,7 @@ mv automate-container-microservices-aws-copilot/code/frontend/* todofrontend/
     └── tsconfig.json
 ```
 
+```
 cd todofrontend
 aws codecommit create-repository --repository-name todofrontend --repository-description "My todoapp frontend repository"
 git init
@@ -166,7 +174,9 @@ git remote add origin https://git-codecommit.$(aws configure get region).amazona
 git add -A
 git commit -m 'initial commit'
 git push origin main
-
+```
 Dọn dẹp
+```
 aws codecommit delete-repository --repository-name todofrontend
 aws codecommit delete-repository --repository-name todobackend
+```
